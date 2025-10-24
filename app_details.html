@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تفاصيل التطبيق - موقع تطبيقات الذكاء الاصطناعي</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="home.html">الرئيسية</a></li>
+                <li><a href="aboutus.html">من نحن</a></li>
+                <li><a href="apps.html" class="active">التطبيقات</a></li>
+                <li><a href="add_app.html">إضافة تطبيق</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="app-details-page">
+            <h1>تفاصيل التطبيق</h1>
+            <div class="app-detail-content">
+                <div class="app-header">
+                    <h2 id="appTitle">AI Assistant Pro</h2>
+                    <p class="company-name">شركة: <span id="companyName">Tech Innovations</span></p>
+                </div>
+                
+                <div class="app-info">
+                    <div class="info-item">
+                        <h3>مجال الاستخدام</h3>
+                        <p id="appField">Education</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>الحالة</h3>
+                        <p id="appStatus">مجاني</p>
+                    </div>
+                </div>
+                
+                <div class="app-description">
+                    <h3>وصف التطبيق</h3>
+                    <p id="appDescription">مساعد ذكي متطور يساعد الطلاب في الدراسة وحل المسائل التعليمية</p>
+                </div>
+                
+                <div class="app-media">
+                    <div class="logo-image">
+                        <h3>شعار التطبيق</h3>
+                        <img id="appLogo" src="https://via.placeholder.com/150" alt="شعار التطبيق">
+                    </div>
+                    
+                    <div class="video-demo">
+                        <h3>فيديو توضيحي</h3>
+                        <video id="appVideo" width="100%" controls>
+                            <source src="placeholder.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    
+                    <div class="audio-logo">
+                        <h3>الشعار الصوتي</h3>
+                        <audio id="appAudio" controls>
+                            <source src="placeholder.mp3" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                </div>
+                
+                <div class="back-button">
+                    <a href="apps.html">العودة إلى قائمة التطبيقات</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 موقع تطبيقات الذكاء الاصطناعي. جميع الحقوق محفوظة.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="myFunctions.js"></script>
+    <script>
+        // Get URL parameters
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(window.location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+        
+        // Set app details based on URL parameter
+        $(document).ready(function() {
+            var appId = getUrlParameter('id');
+            
+            // In a real application, you would fetch the app details from a database
+            // For this example, we'll use static data based on the app ID
+            var appData = {
+                '1': {
+                    title: 'AI Assistant Pro',
+                    company: 'Tech Innovations',
+                    field: 'Education',
+                    status: 'مجاني',
+                    description: 'مساعد ذكي متطور يساعد الطلاب في الدراسة وحل المسائل التعليمية',
+                    logo: 'https://via.placeholder.com/150',
+                    video: 'placeholder.mp4',
+                    audio: 'placeholder.mp3'
+                },
+                '2': {
+                    title: 'Smart Retail',
+                    company: 'Retail AI Solutions',
+                    field: 'E-Commerce',
+                    status: 'غير مجاني',
+                    description: 'نظام ذكي لإدارة المبيعات والمخزون في المتاجر الإلكترونية',
+                    logo: 'https://via.placeholder.com/150',
+                    video: 'placeholder.mp4',
+                    audio: 'placeholder.mp3'
+                },
+                '3': {
+                    title: 'Medical Diagnosis AI',
+                    company: 'HealthTech',
+                    field: 'Healthcare',
+                    status: 'غير مجاني',
+                    description: 'تطبيق لمساعدة الأطباء في تشخيص الأمراض بدقة عالية',
+                    logo: 'https://via.placeholder.com/150',
+                    video: 'placeholder.mp4',
+                    audio: 'placeholder.mp3'
+                },
+                '4': {
+                    title: 'Autonomous Vehicle System',
+                    company: 'AutoTech',
+                    field: 'Robotics',
+                    status: 'غير مجاني',
+                    description: 'نظام للتحكم في المركبات ذاتية القيادة',
+                    logo: 'https://via.placeholder.com/150',
+                    video: 'placeholder.mp4',
+                    audio: 'placeholder.mp3'
+                },
+                '5': {
+                    title: 'Financial Advisor AI',
+                    company: 'FinTech Solutions',
+                    field: 'Finance',
+                    status: 'مجاني',
+                    description: 'مستشار مالي ذكي يساعد في إدارة الاستثمارات والتخطيط المالي',
+                    logo: 'https://via.placeholder.com/150',
+                    video: 'placeholder.mp4',
+                    audio: 'placeholder.mp3'
+                }
+            };
+            
+            if (appData[appId]) {
+                var app = appData[appId];
+                $('#appTitle').text(app.title);
+                $('#companyName').text(app.company);
+                $('#appField').text(app.field);
+                $('#appStatus').text(app.status);
+                $('#appDescription').text(app.description);
+                $('#appLogo').attr('src', app.logo);
+                $('#appVideo source').attr('src', app.video);
+                $('#appAudio source').attr('src', app.audio);
+                
+                // Reload media elements to reflect new sources
+                $('#appVideo')[0].load();
+                $('#appAudio')[0].load();
+            } else {
+                // Default to first app if no valid ID provided
+                window.location.href = 'app_details.html?id=1';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إضافة تطبيق جديد - موقع تطبيقات الذكاء الاصطناعي</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="home.html">الرئيسية</a></li>
+                <li><a href="aboutus.html">من نحن</a></li>
+                <li><a href="apps.html">التطبيقات</a></li>
+                <li><a href="add_app.html" class="active">إضافة تطبيق</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="card add-app-form">
+            <div class="notification info">
+                <p>ℹ️ بعد إرسال النموذج، سيظهر التطبيق الجديد في صفحة "التطبيقات".</p>
+            </div>
+            
+            <h1>إضافة تطبيق جديد</h1>
+            <form id="appForm">
+                <div class="form-group">
+                    <label for="appName">اسم التطبيق (أحرف إنكليزية هجائية فقط بدون أرقام أو فراغات):</label>
+                    <input type="text" id="appName" name="appName" required>
+                    <span class="error" id="appNameError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="companyName">اسم الشركة (أحرف إنكليزية هجائية فقط):</label>
+                    <input type="text" id="companyName" name="companyName" required>
+                    <span class="error" id="companyNameError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="website">الموقع الإلكتروني:</label>
+                    <input type="url" id="website" name="website" required>
+                    <span class="error" id="websiteError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="isFree">مجاني أم لا:</label>
+                    <select id="isFree" name="isFree" required>
+                        <option value="">اختر</option>
+                        <option value="مجاني">مجاني</option>
+                        <option value="غير مجاني">غير مجاني</option>
+                    </select>
+                    <span class="error" id="isFreeError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="field">مجال الاستخدام:</label>
+                    <select id="field" name="field" required>
+                        <option value="">اختر مجال الاستخدام</option>
+                        <option value="E-Commerce">E-Commerce</option>
+                        <option value="Education">Education</option>
+                        <option value="Healthcare">Healthcare</option>
+                        <option value="Robotics">Robotics</option>
+                        <option value="Finance">Finance</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <span class="error" id="fieldError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">شرح مختصر عن التطبيق:</label>
+                    <textarea id="description" name="description" rows="4" required></textarea>
+                    <span class="error" id="descriptionError"></span>
+                </div>
+
+                <div class="form-buttons">
+                    <button type="submit">إرسال</button>
+                    <button type="reset">إعادة</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy;  Ghiath Jarjanazi موقع تطبيقات الذكاء الاصطناعي. تصميم الطالب </p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="myFunctions.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#appForm').submit(function(e) {
+                e.preventDefault();
+                
+                // Reset errors
+                $('.error').text('');
+                
+                // Get form values
+                var appName = $('#appName').val().trim();
+                var companyName = $('#companyName').val().trim();
+                var website = $('#website').val().trim();
+                var isFree = $('#isFree').val();
+                var field = $('#field').val();
+                var description = $('#description').val().trim();
+                
+                // Validation
+                var isValid = true;
+                
+                // Validate app name (English letters only, no numbers or spaces)
+                var appNameRegex = /^[A-Za-z]+$/;
+                if (!appNameRegex.test(appName)) {
+                    $('#appNameError').text('اسم التطبيق يجب أن يحتوي على أحرف إنكليزية هجائية فقط بدون أرقام أو فراغات');
+                    isValid = false;
+                }
+                
+                // Validate company name (English letters only)
+                if (!appNameRegex.test(companyName)) {
+                    $('#companyNameError').text('اسم الشركة يجب أن يحتوي على أحرف إنكليزية هجائية فقط');
+                    isValid = false;
+                }
+                
+                // Validate website URL
+                if (!website) {
+                    $('#websiteError').text('يرجى إدخال موقع إلكتروني صحيح');
+                    isValid = false;
+                }
+                
+                // Validate free status
+                if (!isFree) {
+                    $('#isFreeError').text('يرجى تحديد ما إذا كان التطبيق مجاني أم لا');
+                    isValid = false;
+                }
+                
+                // Validate field
+                if (!field) {
+                    $('#fieldError').text('يرجى اختيار مجال الاستخدام');
+                    isValid = false;
+                }
+                
+                // Validate description
+                if (!description) {
+                    $('#descriptionError').text('يرجى إدخال شرح مختصر عن التطبيق');
+                    isValid = false;
+                }
+                
+                if (isValid) {
+                    // Create app object
+                    var newApp = {
+                        id: Date.now(), // Unique ID based on timestamp
+                        name: appName,
+                        company: companyName,
+                        website: website,
+                        isFree: isFree,
+                        field: field,
+                        description: description
+                    };
+                    
+                    // Save to localStorage
+                    var apps = JSON.parse(localStorage.getItem('aiApps')) || [];
+                    apps.push(newApp);
+                    localStorage.setItem('aiApps', JSON.stringify(apps));
+                    
+                    // Show success message and redirect
+                    alert('تم إضافة التطبيق بنجاح! سيتم تحويلك إلى صفحة التطبيقات.');
+                    window.location.href = 'apps.html';
+                }
+            });
+            
+            // Reset form
+            $('#appForm')[0].reset();
+        });
+    </script>
+</body>
+</html>

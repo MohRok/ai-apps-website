@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>التطبيقات - موقع تطبيقات الذكاء الاصطناعي</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="home.html">الرئيسية</a></li>
+                <li><a href="aboutus.html">من نحن</a></li>
+                <li><a href="apps.html" class="active">التطبيقات</a></li>
+                <li><a href="add_app.html">إضافة تطبيق</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="apps-intro">
+            <h1>تطبيقات الذكاء الاصطناعي</h1>
+            <p>استعرض أحدث التطبيقات المطورة باستخدام تقنيات الذكاء الاصطناعي المتطورة</p>
+        </section>
+
+        <section class="card apps-table">
+            <div class="notification info">
+                <p>ℹ️ يمكنك إضافة تطبيقات جديدة باستخدام صفحة "إضافة تطبيق". ستظهر التطبيقات المضافة هنا تلقائيًا.</p>
+            </div>
+            
+            <table id="appsTable">
+                <thead>
+                    <tr>
+                        <th>اسم التطبيق</th>
+                        <th>اسم الشركة المطورة</th>
+                        <th>مجال الاستخدام</th>
+                        <th>مجاني/غير مجاني</th>
+                        <th>الإجراءات</th>
+                    </tr>
+                </thead>
+                <tbody id="appsTableBody">
+                    <!-- Static apps will be loaded here -->
+                    <tr>
+                        <td>AI Assistant Pro</td>
+                        <td>Tech Innovations</td>
+                        <td>Education</td>
+                        <td>مجاني</td>
+                        <td><a href="app_details.html?id=1" class="details-btn">إظهار التفاصيل</a></td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Smart Retail</td>
+                        <td>Retail AI Solutions</td>
+                        <td>E-Commerce</td>
+                        <td>غير مجاني</td>
+                        <td><a href="app_details.html?id=2" class="details-btn">إظهار التفاصيل</a></td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Medical Diagnosis AI</td>
+                        <td>HealthTech</td>
+                        <td>Healthcare</td>
+                        <td>غير مجاني</td>
+                        <td><a href="app_details.html?id=3" class="details-btn">إظهار التفاصيل</a></td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Autonomous Vehicle System</td>
+                        <td>AutoTech</td>
+                        <td>Robotics</td>
+                        <td>غير مجاني</td>
+                        <td><a href="app_details.html?id=4" class="details-btn">إظهار التفاصيل</a></td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Financial Advisor AI</td>
+                        <td>FinTech Solutions</td>
+                        <td>Finance</td>
+                        <td>مجاني</td>
+                        <td><a href="app_details.html?id=5" class="details-btn">إظهار التفاصيل</a></td>
+                    </tr>
+                    <!-- Dynamic apps will be appended here -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy;  Ghiath Jarjanazi موقع تطبيقات الذكاء الاصطناعي. تصميم الطالب </p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="myFunctions.js"></script>
+    <script>
+        // Load apps from localStorage when page loads
+        $(document).ready(function() {
+            var apps = JSON.parse(localStorage.getItem('aiApps')) || [];
+            
+            // Append dynamic apps to the table
+            apps.forEach(function(app) {
+                var row = `
+                    <tr>
+                        <td>${app.name}</td>
+                        <td>${app.company}</td>
+                        <td>${app.field}</td>
+                        <td>${app.isFree}</td>
+                        <td><button class="details-btn" onclick="showAppDetails('${app.id}')">إظهار التفاصيل</button></td>
+                    </tr>
+                `;
+                $('#appsTableBody').append(row);
+            });
+        });
+        
+        // Function to show app details
+        function showAppDetails(appId) {
+            // Save the app details to localStorage for the details page to access
+            var apps = JSON.parse(localStorage.getItem('aiApps')) || [];
+            var app = apps.find(function(a) { return a.id == appId; });
+            
+            if (app) {
+                localStorage.setItem('currentApp', JSON.stringify(app));
+                window.location.href = 'app_details.html?id=' + appId;
+            }
+        }
+    </script>
+</body>
+</html>
